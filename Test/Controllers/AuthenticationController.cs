@@ -45,7 +45,8 @@ namespace Test.Controllers
             }
 
             await _userManager.AddToRoleAsync(user, model.Role);
-            return Ok(new { message = "User registered successfully!" });
+            return CreatedAtAction(nameof(Register), new {model}, "User created successfully");
+            //return Ok(new { message = "User registered successfully!" });
         }
 
 

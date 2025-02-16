@@ -58,27 +58,13 @@ builder.Services.AddSwaggerGen(options =>
         Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
         Name = "Authorization",
         In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey,
+        Type = SecuritySchemeType.Http, 
         Scheme = "Bearer"
     });
 
-
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement{
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
-
-    // Optionally, add other Swagger configurations like document versions, etc.
+    options.OperationFilter<AuthorizeCheckOperationFilter>();
 });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

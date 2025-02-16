@@ -6,11 +6,12 @@ namespace Test.Controllers
 {
     [Route("api/admin")]
     [ApiController]
-    [Authorize(Roles = "admin")]
+    
     public class AdminController : ControllerBase
     {
 
-        [HttpGet("dashboard")]
+        [HttpGet("admin-portal")]
+        [Authorize(Roles = "admin")]
         public IActionResult AdminPortal()
         {
             var userName = User.Identity?.Name; 
